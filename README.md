@@ -3,7 +3,6 @@
 [![](https://jitpack.io/v/AWLRHM/PersianCalendar.svg)](https://jitpack.io/#AWLRHM/PersianCalendar)
 
 
-
 * Add it in your root build.gradle at the end of repositories:
 ```sh
 allprojects {
