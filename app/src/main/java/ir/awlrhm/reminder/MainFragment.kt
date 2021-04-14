@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ir.awlrhm.calendar.PersianHorizontalCalendar
 import ir.awlrhm.calendar.enums.PersianCustomMarks
 import ir.awlrhm.calendar.enums.PersianViewPagerType
+import ir.awlrhm.calendar.getDayName
+import ir.awlrhm.calendar.getMonthName
 import ir.awlrhm.calendar.model.CustomGradientDrawable
 import kotlinx.android.synthetic.main.contain_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
