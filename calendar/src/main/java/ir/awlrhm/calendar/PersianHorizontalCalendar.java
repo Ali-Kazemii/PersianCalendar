@@ -34,6 +34,7 @@ import ir.awlrhm.calendar.listener.SmallPageChangeListener;
 import ir.awlrhm.calendar.model.CustomGradientDrawable;
 import ir.awlrhm.calendar.model.MarkSetup;
 
+import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Weeks;
@@ -45,7 +46,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
-
 
 public class PersianHorizontalCalendar extends LinearLayout implements PageViewListener, AnimationsListener {
 
@@ -90,7 +90,12 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
     public String[] NAME_OF_DAYS_RTL = new String[]{"ش", "ی", "د", "س", "چ", "پ", "ج"};
     public String[] NAME_OF_DAYS_LTR = new String[]{"SAT", "SUN", "MON", "TUE", "WED", "THU", "FRI"};
 
+    private Chronology perChr  =
+            PersianChronologyKhayyam.getInstance(/*DateTimeZone.forID("Asia/Tehran")*/ /*DateTimeZone.forID("Asia/Tehran")*/
+            DateTimeZone.getDefault()
+            );
 
+    private DateTime now = new DateTime(perChr);
 
     public enum FirstDay {
         SATDAY,
@@ -391,68 +396,6 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
     }
 
 
-    public String getMonthString_RTL(int mothOfYear) {
-        switch (mothOfYear) {
-            case 1:
-                return "فروردین";
-            case 2:
-                return "اردیبهشت";
-            case 3:
-                return "خرداد";
-            case 4:
-                return "تیر";
-            case 5:
-                return "مرداد";
-            case 6:
-                return "شهریور";
-            case 7:
-                return "مهر";
-            case 8:
-                return "آبان";
-            case 9:
-                return "آذر";
-            case 10:
-                return "دی";
-            case 11:
-                return "بهمن";
-            case 12:
-                return "اسفند";
-            default:
-                return "";
-        }
-    }
-
-    public String getMonthString_LTR(int mothOfYear) {
-        switch (mothOfYear) {
-            case 1:
-                return "Farvardin";
-            case 2:
-                return "Ordibehesht";
-            case 3:
-                return "Khordad";
-            case 4:
-                return "Tir";
-            case 5:
-                return "Mordad";
-            case 6:
-                return "Shahrivar";
-            case 7:
-                return "Mehr";
-            case 8:
-                return "Aban";
-            case 9:
-                return "Azar";
-            case 10:
-                return "Day";
-            case 11:
-                return "Bahman";
-            case 12:
-                return "Esfand";
-            default:
-                return "";
-        }
-    }
-
     protected void lock() {
         lock = true;
     }
@@ -743,6 +686,13 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
 
     public PersianHorizontalCalendar clearMarks() {
         marks.clear();
+        return this;
+    }
+
+    public PersianHorizontalCalendar removeMarkAt(DateTime dateTime){
+        marks.removeMarkAt(dateTime);
+        if(dateTime.toLocalDate().equals(now.toLocalDate()))
+            marks.markToday();
         return this;
     }
 
@@ -1143,7 +1093,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
 
         protected void initViews() {
             inflate(getContext(), R.layout.awlrhm_page_view, this);
-            gridLayout = (GridLayout) findViewById(R.id.grid_layout);
+            gridLayout = findViewById(R.id.grid_layout);
             gridLayout.setColumnCount(COLUMNS);
             gridLayout.setRowCount(rows + (utils.dayLabelExtraRow()));
         }
@@ -1510,6 +1460,10 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
                 if (markSetup.canBeDeleted())
                     marksMap.remove(dateTimeToStringKey(dateTime));
             unlock();
+        }
+
+        public void removeMarkAt(DateTime dateTime){
+            marksMap.remove(dateTimeToStringKey(dateTime));
         }
 
         public void clear() {

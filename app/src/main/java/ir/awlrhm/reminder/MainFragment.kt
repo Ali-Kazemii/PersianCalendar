@@ -28,6 +28,7 @@ class MainFragment(
     private val callback: () -> Unit
 ) : Fragment() {
 
+    private var isRemove: Boolean = true
     private val perChr: Chronology =
         PersianChronologyKhayyam.getInstance(/*DateTimeZone.forID("Asia/Tehran")*/ /*DateTimeZone.forID("Asia/Tehran")*/
             DateTimeZone.getDefault()
@@ -49,13 +50,14 @@ class MainFragment(
         R.drawable.bkg_12_dec,
     )
 
+    @SuppressLint("SetTextI18n")
     private fun setup() {
         val activity = activity ?: return
 
         imgMonth.background = ContextCompat.getDrawable(activity, monthResource[getMonthIndex(now)])
         txtToday.text = now.dayOfMonth.toString()
         txtTitle.text =
-            "${now.dayOfMonth} ${persianCalendar.getMonthString_RTL(now.monthOfYear)}  ${now.year}"
+            "${now.dayOfMonth} ${getMonthName(now.monthOfYear)}  ${now.year}"
 
         rclReminder.layoutManager = LinearLayoutManager(context)
         rclReminder.setHasFixedSize(true)
@@ -99,7 +101,7 @@ class MainFragment(
                 @SuppressLint("SetTextI18n")
                 override fun onCalendarScroll(dateTime: DateTime) {
                     txtTitle.text =
-                        "${dateTime.dayOfMonth} ${persianCalendar.getMonthString_RTL(dateTime.monthOfYear)}  ${dateTime.year}"
+                        "${dateTime.dayOfMonth} ${getMonthName(dateTime.monthOfYear)}  ${dateTime.year}"
                     imgMonth.background = ContextCompat.getDrawable(
                         activity,
                         monthResource[getMonthIndex(dateTime)]
@@ -109,7 +111,7 @@ class MainFragment(
                 @SuppressLint("SetTextI18n")
                 override fun onDateSelected(dateTime: DateTime) {
                     txtTitle.text =
-                        "${dateTime.dayOfMonth} ${persianCalendar.getMonthString_RTL(dateTime.monthOfYear)}  ${dateTime.year}"
+                        "${dateTime.dayOfMonth} ${getMonthName(dateTime.monthOfYear)}  ${dateTime.year}"
                     imgMonth.background = ContextCompat.getDrawable(
                         activity,
                         monthResource[getMonthIndex(dateTime)]
@@ -154,7 +156,18 @@ class MainFragment(
             rclReminder.isVisible = true
         }
         btnAdd.setOnClickListener {
-            callback.invoke()
+//            callback.invoke()
+            if(isRemove) {
+                isRemove = false
+                persianCalendar.markDate(
+                    now,
+                    PersianCustomMarks.SmallOval_Bottom,
+                    Color.RED
+                )
+            }else {
+                isRemove = true
+                persianCalendar.removeMarkAt(now)
+            }
         }
     }
 
@@ -162,13 +175,13 @@ class MainFragment(
         rclReminder.adapter = Adapter(
             mutableListOf<Model>().apply {
                 add(
-                    Model("15", "یکشنبه", "فروردین", "جلسه با شرکت نیک آفرینگان")
+                    Model("15", getDayName(now.dayOfWeek), "فروردین", "جلسه با شرکت نیک آفرینگان")
                 )
                 add(
-                    Model("24", "سه شنبه", "فروردین", "جلسه کارگاه آموزشی")
+                    Model("24", getDayName(now.dayOfWeek), "فروردین", "جلسه کارگاه آموزشی")
                 )
                 add(
-                    Model("1", "چهارشنبه", "اردیبهشت", "جلسه اداره برق منطقه ای")
+                    Model("1", getDayName(now.dayOfWeek), "اردیبهشت", "جلسه اداره برق منطقه ای")
                 )
                 add(
                     Model("12", "دوشنبه", "اردیبهشت", "جلسه با دکتر علاقه مندان")
@@ -177,7 +190,7 @@ class MainFragment(
                     Model("5", "یکشنبه", "خرداد", "جلسه اداره برق منطقه ای")
                 )
             }
-        ){
+        ) {
             callback.invoke()
         }
     }
