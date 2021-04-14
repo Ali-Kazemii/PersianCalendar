@@ -24,16 +24,6 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import ir.awlrhm.calendar.animator.CalendarAnimation;
-import ir.awlrhm.calendar.enums.PersianCustomMarks;
-import ir.awlrhm.calendar.enums.PersianViewPagerType;
-import ir.awlrhm.calendar.listener.AnimationsListener;
-import ir.awlrhm.calendar.listener.PageViewListener;
-import ir.awlrhm.calendar.listener.SmallAnimationListener;
-import ir.awlrhm.calendar.listener.SmallPageChangeListener;
-import ir.awlrhm.calendar.model.CustomGradientDrawable;
-import ir.awlrhm.calendar.model.MarkSetup;
-
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -46,6 +36,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
+
+import ir.awlrhm.calendar.animator.CalendarAnimation;
+import ir.awlrhm.calendar.enums.PersianCustomMarks;
+import ir.awlrhm.calendar.enums.PersianViewPagerType;
+import ir.awlrhm.calendar.listener.AnimationsListener;
+import ir.awlrhm.calendar.listener.PageViewListener;
+import ir.awlrhm.calendar.listener.SmallAnimationListener;
+import ir.awlrhm.calendar.listener.SmallPageChangeListener;
+import ir.awlrhm.calendar.model.CustomGradientDrawable;
+import ir.awlrhm.calendar.model.MarkSetup;
 
 public class PersianHorizontalCalendar extends LinearLayout implements PageViewListener, AnimationsListener {
 

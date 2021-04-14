@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ir.awlrhm.calendar.PersianHorizontalCalendar
 import ir.awlrhm.calendar.enums.PersianCustomMarks
 import ir.awlrhm.calendar.enums.PersianViewPagerType
-import ir.awlrhm.calendar.getDayName
-import ir.awlrhm.calendar.getMonthName
 import ir.awlrhm.calendar.model.CustomGradientDrawable
 import kotlinx.android.synthetic.main.contain_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -59,7 +57,7 @@ class MainFragment(
         imgMonth.background = ContextCompat.getDrawable(activity, monthResource[getMonthIndex(now)])
         txtToday.text = now.dayOfMonth.toString()
         txtTitle.text =
-            "${now.dayOfMonth} ${getMonthName(now.monthOfYear)}  ${now.year}"
+            "${now.dayOfMonth} فروردین  ${now.year}"
 
         rclReminder.layoutManager = LinearLayoutManager(context)
         rclReminder.setHasFixedSize(true)
@@ -103,7 +101,7 @@ class MainFragment(
                 @SuppressLint("SetTextI18n")
                 override fun onCalendarScroll(dateTime: DateTime) {
                     txtTitle.text =
-                        "${dateTime.dayOfMonth} ${getMonthName(dateTime.monthOfYear)}  ${dateTime.year}"
+                        "${dateTime.dayOfMonth} فروردین  ${dateTime.year}"
                     imgMonth.background = ContextCompat.getDrawable(
                         activity,
                         monthResource[getMonthIndex(dateTime)]
@@ -113,7 +111,7 @@ class MainFragment(
                 @SuppressLint("SetTextI18n")
                 override fun onDateSelected(dateTime: DateTime) {
                     txtTitle.text =
-                        "${dateTime.dayOfMonth} ${getMonthName(dateTime.monthOfYear)}  ${dateTime.year}"
+                        "${dateTime.dayOfMonth} فروردین  ${dateTime.year}"
                     imgMonth.background = ContextCompat.getDrawable(
                         activity,
                         monthResource[getMonthIndex(dateTime)]
@@ -177,13 +175,13 @@ class MainFragment(
         rclReminder.adapter = Adapter(
             mutableListOf<Model>().apply {
                 add(
-                    Model("15", getDayName(now.dayOfWeek), "فروردین", "جلسه با شرکت نیک آفرینگان")
+                    Model("15", "دوشنبه", "فروردین", "جلسه با شرکت نیک آفرینگان")
                 )
                 add(
-                    Model("24", getDayName(now.dayOfWeek), "فروردین", "جلسه کارگاه آموزشی")
+                    Model("24", "دوشنبه", "فروردین", "جلسه کارگاه آموزشی")
                 )
                 add(
-                    Model("1", getDayName(now.dayOfWeek), "اردیبهشت", "جلسه اداره برق منطقه ای")
+                    Model("1", "دوشنبه", "اردیبهشت", "جلسه اداره برق منطقه ای")
                 )
                 add(
                     Model("12", "دوشنبه", "اردیبهشت", "جلسه با دکتر علاقه مندان")
