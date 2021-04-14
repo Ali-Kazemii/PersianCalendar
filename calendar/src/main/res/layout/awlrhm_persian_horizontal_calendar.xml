@@ -38,13 +38,15 @@
             android:id="@+id/month_view_pager"
             android:layout_below="@id/lable_cell_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/week_view_pager"
             android:layout_below="@id/lable_cell_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"/>
 
         <include
             android:id="@+id/animate_container"
