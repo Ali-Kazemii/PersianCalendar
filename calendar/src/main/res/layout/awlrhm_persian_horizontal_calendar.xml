@@ -24,7 +24,8 @@
                 android:id="@+id/lable_cell_grid_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:layoutDirection="rtl"/>
 
             <View
                 android:id="@+id/lable_cell_horizontal_line"
@@ -38,15 +39,13 @@
             android:id="@+id/month_view_pager"
             android:layout_below="@id/lable_cell_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="rtl"/>
+            android:layout_height="wrap_content"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/week_view_pager"
             android:layout_below="@id/lable_cell_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="rtl"/>
+            android:layout_height="wrap_content"/>
 
         <include
             android:id="@+id/animate_container"
