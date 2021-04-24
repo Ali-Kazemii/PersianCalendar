@@ -125,7 +125,7 @@ class MainFragment(
 
         persianCalendar
             .markDate(
-                DateTime(1400, 1, 15, 0, 0, perChr),
+                DateTime(1400, 1, 30, 0, 0, perChr),
 //                PersianCustomMarks.SmallOval_Bottom,
 //                Color.RED,
                 CustomGradientDrawable(GradientDrawable.OVAL, Color.RED)
@@ -142,10 +142,12 @@ class MainFragment(
                      .setTextColor(Color.BLACK)
              )*/
             .markDate(
-                DateTime(1400, 1, 12, 0, 0, perChr),
+                DateTime(1400, 1, 31, 0, 0, perChr),
                 PersianCustomMarks.SmallOval_Bottom,
                 Color.RED
             )
+
+        persianCalendar.refresh()
 
         layoutCalendar.setOnClickListener {
             scrollToToday()

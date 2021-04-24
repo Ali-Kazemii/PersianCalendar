@@ -2,8 +2,6 @@ package ir.awlrhm.calendar.model;
 
 import android.graphics.Color;
 
-
-
 public class MarkSetup {
 
     private boolean today;
@@ -44,7 +42,6 @@ public class MarkSetup {
         this.smallOval_Bottom = smallOval_Bottom;
         this.VerticalLine_Right = VerticalLine_Right;
         this.customGradientDrawable = customGradientDrawable;
-
         this.smallOval_Bottom_Color = smallOval_Bottom_Color;
         this.VerticalLine_Right_Color = VerticalLine_Right_Color;
         this.customGradientDrawableMark = customGradientDrawableMark;

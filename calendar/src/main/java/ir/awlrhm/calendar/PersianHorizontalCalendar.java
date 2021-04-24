@@ -90,9 +90,9 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
     public String[] NAME_OF_DAYS_RTL = new String[]{"ش", "ی", "د", "س", "چ", "پ", "ج"};
     public String[] NAME_OF_DAYS_LTR = new String[]{"SAT", "SUN", "MON", "TUE", "WED", "THU", "FRI"};
 
-    private Chronology perChr  =
+    private Chronology perChr =
             PersianChronologyKhayyam.getInstance(/*DateTimeZone.forID("Asia/Tehran")*/ /*DateTimeZone.forID("Asia/Tehran")*/
-            DateTimeZone.getDefault()
+                    DateTimeZone.getDefault()
             );
 
     private DateTime now = new DateTime(perChr);
@@ -146,7 +146,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
     protected boolean lock;
     protected boolean needToFireOnDateSelectedEventAfterScrollToDate = false;
 
-    public Boolean isExpand(){
+    public Boolean isExpand() {
         return ifExpand;
     }
 
@@ -211,6 +211,10 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
             marks.markToday();
         marks.refreshMarkSelected(selectionDate, can_mark_selected_day);
 
+//        initAnimation();
+    }
+
+    public void refresh() {
         initAnimation();
     }
 
@@ -294,7 +298,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
     }
 
     protected void initAnimateContainer() {
-        animateContainer = (GridLayout) findViewById(R.id.animate_container);
+        animateContainer = findViewById(R.id.animate_container);
         animateContainer.getLayoutParams().height = cellHeight;
         int sideMargin = utils.animateContainerExtraSideOffset(getResources());
         animateContainer.setPadding(sideMargin, 0, sideMargin, 0);
@@ -312,7 +316,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
             animations.clearAnimationsListener();
             animations.startHidePagerAnimation();
         } else
-            animations.swithWithoutAnimation();
+            animations.swichWithoutAnimation();
     }
 
     protected void initMonthViewPager() {
@@ -689,9 +693,9 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
         return this;
     }
 
-    public PersianHorizontalCalendar removeMarkAt(DateTime dateTime){
+    public PersianHorizontalCalendar removeMarkAt(DateTime dateTime) {
         marks.removeMarkAt(dateTime);
-        if(dateTime.toLocalDate().equals(now.toLocalDate()))
+        if (dateTime.toLocalDate().equals(now.toLocalDate()))
             marks.markToday();
         return this;
     }
@@ -806,7 +810,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
                             scrollDate = selectionDate;
                         else
                             persianHorizontalExpCalListener.onCalendarScroll(scrollDate.withDayOfMonth(1));
-                    }else{
+                    } else {
                         if (SCROLL_TO_SELECTED_AFTER_COLLAPSE && utils.isTheSameMonthToScrollDate(selectionDate))
                             scrollDate = selectionDate;
                         else {
@@ -899,7 +903,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
             });
         }
 
-        public void swithWithoutAnimation() {
+        public void swichWithoutAnimation() {
             animationsListener.setMonthPagerVisibility(utils.isMonthView() ? View.VISIBLE : View.GONE);
             animationsListener.setWeekPagerVisibility(utils.isMonthView() ? View.GONE : View.VISIBLE);
 
@@ -1245,6 +1249,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
             text.setTextColor(daysTextColorCurrentMonth);
         }
 
+
         public void setTimeType(TimeType timeType) {
             this.timeType = timeType;
             setTextColorByTimeType(daysTextColorCurrentMonth, daysTextColorAnotherMonth);
@@ -1462,7 +1467,7 @@ public class PersianHorizontalCalendar extends LinearLayout implements PageViewL
             unlock();
         }
 
-        public void removeMarkAt(DateTime dateTime){
+        public void removeMarkAt(DateTime dateTime) {
             marksMap.remove(dateTimeToStringKey(dateTime));
         }
 
