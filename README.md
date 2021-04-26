@@ -18,3 +18,6 @@ allprojects {
   implementation 'com.github.AWLRHM:PersianCalendar:$last-release'
  }
  ```
+ 
+ ## License
+ [MIT](https://choosealicense.com/licenses/mit/)
