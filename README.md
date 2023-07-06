@@ -15,7 +15,7 @@ allprojects {
  * Add the dependency
  ```sh
  dependencies {
-  implementation 'com.github.awlrhm:PersianCalendar:$last-release'
+  implementation 'com.github.Ali-Kazemii:PersianCalendar:$last-release'
  }
  ```
  
